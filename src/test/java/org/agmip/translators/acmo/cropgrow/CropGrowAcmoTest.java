@@ -31,7 +31,7 @@ public class CropGrowAcmoTest {
         File file = runner.execute(new File(resource.getPath()).getParent(), "");
         if (file != null) {
             assertTrue(file.exists());
-            assertTrue(file.getName().matches("ACMO_CropGrow-NAU( \\(\\d\\))*.csv"));
+            assertTrue(file.getName().matches("ACMO-MACHAKOS-1-0XFX-0-0-CropGrow-NAU( \\(\\d\\))*.csv"));
             assertTrue(file.delete());
         }
     }

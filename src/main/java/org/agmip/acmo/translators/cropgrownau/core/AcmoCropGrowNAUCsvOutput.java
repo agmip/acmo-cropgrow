@@ -25,6 +25,18 @@ public class AcmoCropGrowNAUCsvOutput {
     
     private static final Logger log = LoggerFactory.getLogger(AcmoCropGrowNAUOutputFileInput.class);
     private File outputFile;
+    private String metaFilePath = null;
+    
+    public AcmoCropGrowNAUCsvOutput() {
+    }
+    
+    public AcmoCropGrowNAUCsvOutput(String sourceFolder) {
+        File dir = new File(sourceFolder);
+        if (!dir.isDirectory()) {
+            dir = dir.getParentFile();
+        }
+        this.metaFilePath = dir.getAbsolutePath() + File.separator + "ACMO_meta.dat";
+    }
     /**
      * Generate ACMO CSV file
      *
@@ -35,7 +47,7 @@ public class AcmoCropGrowNAUCsvOutput {
         MetaReader metaReader = new MetaReader(metaListData);
         OutputSummaryReader summaryReader = new OutputSummaryReader(summaryListData);
         //Create output CSV File
-        outputFile = AcmoUtil.createCsvFile(outputCsvPath, "CropGrow-NAU");
+        outputFile = AcmoUtil.createCsvFile(outputCsvPath, "CropGrow-NAU", metaFilePath);
         CSVWriter writer = new CSVWriter(new FileWriter(outputFile), ',');	
         //write Meta Header
         writer.writeAll(metaReader.getHeader());

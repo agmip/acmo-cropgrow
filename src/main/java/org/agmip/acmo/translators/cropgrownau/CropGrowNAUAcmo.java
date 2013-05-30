@@ -33,7 +33,7 @@ public class CropGrowNAUAcmo implements AcmoTranslator {
             List metaList = cropgrowReader.readMeta(sourceFolder);
             List summaryList = cropgrowReader.readSummary(sourceFolder);
             // Output CSV File
-            AcmoCropGrowNAUCsvOutput csvWriter = new AcmoCropGrowNAUCsvOutput();
+            AcmoCropGrowNAUCsvOutput csvWriter = new AcmoCropGrowNAUCsvOutput(sourceFolder);
             csvWriter.writeFile(destFolder, metaList,summaryList);
             return csvWriter.getOutputFile();
         }catch (Exception e) {
