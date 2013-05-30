@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public class AcmoCropGrowNAUCsvOutput {
     
-    private static final Logger log = LoggerFactory.getLogger(AcmoCropGrowNAUOutputFileInput.class);
+    private static final Logger log = LoggerFactory.getLogger(AcmoCropGrowNAUCsvOutput.class);
     private File outputFile;
     private String metaFilePath = null;
     
