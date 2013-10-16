@@ -54,13 +54,15 @@ public class AcmoCropGrowNAUCsvOutput {
         for (String exname : metaReader.getExname()) {
             List<String> writeData = new ArrayList<String>();
             writeData.addAll(Arrays.asList(metaReader.getData(exname)));
-            //If Something Wrong, Fill blank
-            while (writeData.size() < 39) {
-                writeData.add("");
-            }
-            writeData.set(37, "CropGrow-NAU");
-            //Model Version
-            writeData.set(38, summaryReader.version);
+            // Since QuadUI will guarantee generating the meta data until Model the column, no check is required any more
+//            //If Something Wrong, Fill blank
+//            while (writeData.size() < 47) {
+//                writeData.add("");
+//            }
+//            writeData.set(44, "CropGrow-NAU");
+//            //Model Version
+//            writeData.set(45, summaryReader.version);
+            writeData.add(summaryReader.version);
             writeData.add(summaryReader.GetSummaryData(exname, "hwah"));
             writeData.add(summaryReader.GetSummaryData(exname, "cwah"));
             writeData.add(summaryReader.GetSummaryData(exname, "adat"));
