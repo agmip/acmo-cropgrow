@@ -103,7 +103,7 @@ public class AcmoCropGrowNAUCsvOutput {
             }
             //entry[2] EXNAME, entry[7] TRTNAME
             for(String[] entry:data){
-		if(entry[6].trim().equals(""))
+		if(entry[7].trim().equals(""))
                     exname.add(entry[2]);
 		else
                     exname.add(entry[2]+"-"+entry[7]);
@@ -116,7 +116,7 @@ public class AcmoCropGrowNAUCsvOutput {
             // There needs to be a blank array or something returned here - CV
             int line = exname.indexOf(exp);
             if (line == -1) {
-		log.error(exp + "MetaReader, Entry {} not found");
+		log.error("MetaReader, Entry {} not found", exp);
 		String [] blank = {};
 		return blank;
             } else {
@@ -163,7 +163,7 @@ public class AcmoCropGrowNAUCsvOutput {
        public String GetSummaryData(String exName,String columnName) throws NullPointerException,IndexOutOfBoundsException{
            int line = exname.indexOf(exName);
             if (line == -1) {
-		log.error(exName + " OutputSummary.CSV, Entry {} not found");
+		log.error(" OutputSummary.CSV, Entry {} not found", exName);
 		return "";
             } else {
                int columnIndex = (Integer)dataTitleMap.get(columnName.toUpperCase());
