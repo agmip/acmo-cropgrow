@@ -84,6 +84,8 @@ public class AcmoCropGrowNAUCsvOutput {
         private List<String[]> data = new ArrayList<String[]>();
 	private List<String[]> header=new ArrayList<String[]>();
 	private List<String>   exname = new ArrayList<String>();
+        private int exNameIdx = -1;
+        private int trtNameIdx = -1;
         public MetaReader(List metaList) throws NullPointerException,IndexOutOfBoundsException{
             Iterator i = metaList.iterator();
             if(i.hasNext()){
@@ -93,7 +95,9 @@ public class AcmoCropGrowNAUCsvOutput {
                 header.add((String[])i.next());
             }
             if(i.hasNext()){
-                header.add((String[])i.next());
+                String[] titles = (String[])i.next();
+                setIndex(titles);
+                header.add(titles);
             }
             while (i.hasNext()){
                 String[] theData = (String[])i.next();
@@ -103,12 +107,27 @@ public class AcmoCropGrowNAUCsvOutput {
             }
             //entry[2] EXNAME, entry[7] TRTNAME
             for(String[] entry:data){
-		if(entry[7].trim().equals(""))
-                    exname.add(entry[2]);
-		else
-                    exname.add(entry[2]+"-"+entry[7]);
+		if(entry[trtNameIdx].trim().equals("")) {
+                    exname.add(entry[exNameIdx]);
+                } else {
+                    exname.add(entry[exNameIdx]+"-"+entry[trtNameIdx]);
+                }
 		}
         }
+        private void setIndex(String[] titles) {
+            for (int i = 0; i < titles.length; i++) {
+                if (exNameIdx >= 0 && trtNameIdx >= 0) {
+                    return;
+                } else if (titles[i].toUpperCase().equals("EXNAME")) {
+                    exNameIdx = i;
+                } else if (titles[i].toUpperCase().equals("TRT_NAME")) {
+                    trtNameIdx = i;
+                }
+            }
+            exNameIdx = 2;  // For template version 4.0.1
+            trtNameIdx = 7; // For template version 4.0.1
+        }
+        
         public List<String[]> getHeader(){
             return header;
 	}
