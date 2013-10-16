@@ -101,12 +101,12 @@ public class AcmoCropGrowNAUCsvOutput {
                     data.add(theData);
                 }
             }
-            //entry[5] EXNAME, entry[6] TRTNAME
+            //entry[2] EXNAME, entry[7] TRTNAME
             for(String[] entry:data){
 		if(entry[6].trim().equals(""))
-                    exname.add(entry[5]);
+                    exname.add(entry[2]);
 		else
-                    exname.add(entry[5]+"-"+entry[6]);
+                    exname.add(entry[2]+"-"+entry[7]);
 		}
         }
         public List<String[]> getHeader(){
